@@ -1,0 +1,19 @@
+#Phase 1: 100% to v1
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: orders-service
+  namespace: microservices
+spec:
+  hosts:
+    - orders-service.microservices.svc.cluster.local
+  http:
+    - route:
+        - destination:
+            host: orders-service.microservices.svc.cluster.local
+            subset: v1
+          weight: 0
+        - destination:
+            host: orders-service.microservices.svc.cluster.local
+            subset: v2
+          weight: 100
